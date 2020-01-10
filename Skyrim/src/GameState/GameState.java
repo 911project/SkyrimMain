@@ -1,5 +1,7 @@
 package GameState;
 
+import java.io.IOException;
+
 public abstract class GameState {
 	
 	protected GameStateManager gsm;

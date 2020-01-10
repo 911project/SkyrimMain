@@ -19,6 +19,7 @@ public class Player extends MapObject{
 	private int fireCost;
 	private int fireBallDamage;
 	private ArrayList<FireBall> fireBalls;
+	
 	//scratch
 	private boolean scratching;
 	private int scratchDamage, scratchRange;
@@ -29,6 +30,7 @@ public class Player extends MapObject{
 	//animazione
 	//devo modificare la distanza tra i personaggi nel progetto perchè quando ha l'animazione di caduta si vedono i piedi della camminata probabilmente
 	private ArrayList<BufferedImage[]> sprites;
+	//ongi animazione ha un tot di passaggi
 	private final int[] numFrames = {2, 8, 1, 2, 4, 2, 5};
 	
 	//animation actions
@@ -89,6 +91,7 @@ public class Player extends MapObject{
 			sprites = new ArrayList<BufferedImage[]>();
 			
 			for(int i = 0; i<7; i++) {
+				
 				BufferedImage[] bi = new BufferedImage[numFrames[i]];
 				for(int j=0;j<numFrames[i];j++) {
 					if(i != 6) {
@@ -176,8 +179,6 @@ public class Player extends MapObject{
 		}
 		
 		
-		//non puoi attaccare mentre ti muovi
-		
 		
 		if(jumping && !falling) {
 			dy = jumpStart;
@@ -185,6 +186,7 @@ public class Player extends MapObject{
 		}
 		
 		if(falling) {
+			
 			if(dy > 0 && gliding) dy += fallSpeed * 0.1;
 			else dy += fallSpeed;
 			
@@ -220,6 +222,14 @@ public class Player extends MapObject{
 				fireBalls.add(fb);
 			}
 		}
+		for(int i = 0; i < fireBalls.size(); i++) {
+			fireBalls.get(i).update();
+			if(fireBalls.get(i).shouldRemove()) {
+				fireBalls.remove(i);
+				i--;
+			}
+		}
+		
 		
 		if(scratching) {
 			if(currentAction != SCRATCHING) {

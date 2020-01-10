@@ -2,6 +2,10 @@ package GameState;
 
 import TileMap.Background;
 import java.awt.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 import com.sun.glass.events.KeyEvent;
 
@@ -66,6 +70,27 @@ public class MenuState extends GameState{
 	
 	private void select() {
 		if(currentChoice == 0) {
+			
+			FileWriter w;
+		    try {
+		    	
+				w=new FileWriter("Save.txt");
+				BufferedWriter b;
+			    b=new BufferedWriter (w);
+
+			    
+			    b.write("160 \n");
+			    b.write("100 \n");
+			    b.write("0 \n");
+			    b.write("0 \n");
+
+			    b.flush();
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			gsm.setState(GameStateManager.LEVEL1STATE);
 		}
 		if(currentChoice == 1) {

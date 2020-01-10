@@ -1,5 +1,6 @@
 package GameState;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
@@ -25,7 +26,12 @@ public class GameStateManager {
 		currentState = MENUSTATE;
 		previousState = currentState;
 		gameStates.add(new MenuState(this));		
-		gameStates.add(new Level1State(this));
+		try {
+			gameStates.add(new Level1State(this));
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
 		gameStates.add(new OptionState(this));		
 		gameStates.add(new PauseState(this));		
 		gameStates.add(new PauseOptionState(this));

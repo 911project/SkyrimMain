@@ -36,7 +36,7 @@ public class FireBall extends MapObject{
 			}
 			
 			hitSprites = new BufferedImage[3];
-			for(int i = 0; i < sprites.length; i++) {
+			for(int i = 0; i < hitSprites.length; i++) {
 				hitSprites[i] = spritesheet.getSubimage(i * widht, height, widht, height);
 			}
 			
@@ -70,9 +70,14 @@ public class FireBall extends MapObject{
 		
 		checkTileMapCollision();
 		setPosition(xtemp, ytemp);
+		
+		if(dx == 0 && !hit) {
+			setHit();
+		}
+		
 		animation.update();
 		if(hit && animation.hasPlayedOnce()) {
-			remove = true;
+			remove = true; 
 		}
 		
 	}
